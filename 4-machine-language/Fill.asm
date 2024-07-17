@@ -13,13 +13,39 @@
     @limit
     M=D // limit = 24,576
 
+(CHECKKBD)
+    @SCREEN
+    D=A
+    @addr
+    M=D // reset addr to 16,384
+    @KBD
+    D=M
+    @BLACK
+    D;JGT // Color the screen if a key is pressed.
 
-(LOOP)
+(WHITE)
     @limit
     D=M
     @addr
     D=D-M // D = limit - addr
-    @END
+    @CHECKKBD
+    D;JEQ // End if we are at the limit 
+
+    @addr
+    A=M
+    M=0
+    D=A+1
+    @addr
+    M=D
+    @WHITE
+    0;JMP
+
+(BLACK)
+    @limit
+    D=M
+    @addr
+    D=D-M // D = limit - addr
+    @CHECKKBD
     D;JEQ // End if we are at the limit 
 
     @addr
@@ -28,11 +54,7 @@
     D=A+1
     @addr
     M=D
-    @LOOP
-    0;JMP
-
-(END)
-    @END
+    @BLACK
     0;JMP
 
 
