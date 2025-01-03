@@ -1,0 +1,3 @@
+[submodule "hack-assembler"]
+	path = 6-assembler
+	url = https://github.com/tangerineey/hack-assembler.git
